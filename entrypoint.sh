@@ -2,7 +2,7 @@
 set -euo pipefail
 mkdir -p /root/.hermes/profiles/jailbreak
 echo "==> fetching profile bundle"
-curl -fsSL -H "Authorization: Bearer ${HF_TOKEN}" \
+curl -fsSL --retry 8 --retry-delay 5 --retry-all-errors -H "Authorization: Bearer ${HF_TOKEN}" \
   "https://huggingface.co/datasets/LukaLZ/hermes-profile-store/resolve/main/profile.tar.gz" \
   -o /tmp/profile.tar.gz
 echo "==> bundle size: $(stat -c%s /tmp/profile.tar.gz) bytes"
