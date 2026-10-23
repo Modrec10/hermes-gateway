@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certifi
 RUN pip install --no-cache-dir hermes-agent aiohttp websockets
 
 WORKDIR /app
-COPY entrypoint.sh /app/entrypoint.sh
+COPY . /app/
 RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 10000
