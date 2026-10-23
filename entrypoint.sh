@@ -9,8 +9,7 @@ echo "==> bundle size: $(stat -c%s /tmp/profile.tar.gz) bytes"
 tar -xzf /tmp/profile.tar.gz -C /root/.hermes/profiles/jailbreak
 echo "==> profile extracted: $(ls /root/.hermes/profiles/jailbreak | wc -l) entries"
 
-# Render requires an HTTP listener on $PORT; Hermes gateway is outbound-only,
-# so a tiny health server answers Render's (and UptimeRobot's) pings.
-python3 -m http.server "${PORT:-10000}" --bind 0.0.0.0 --directory /app &
+# PC-bridge relay on the public port (health + /ws/agent + /run)
+python3 /app/relay.py &
 
 exec hermes --profile jailbreak gateway run
